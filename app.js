@@ -16,13 +16,13 @@ app.listen(process.env.PORT || 3000, (err)=>{
 
 app.set('view engine' , 'ejs');
 app.use(express.static('public'));
-app.get('/', (req, res)=>{
+app.get('http://campus-iitbbs.herokuapp.com/', (req, res)=>{
     res.render('index');
 });
-app.get('/about', (req, res)=>{
-    res.render('about');
-});
+// app.get('/about', (req, res)=>{
+//     res.render('about');
+// });
 
-app.get('/contact-us', (req, res)=>{
-    res.render('contact');
-});
+// app.get('/contact-us', (req, res)=>{
+//     res.render('contact');
+// });
