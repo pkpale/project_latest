@@ -16,7 +16,7 @@ app.listen(process.env.PORT || 3000, (err)=>{
 
 app.set('view engine' , 'ejs');
 app.use(express.static('public'));
-app.get('http://campus-iitbbs.herokuapp.com/', (req, res)=>{
+app.get('/', (req, res)=>{
     res.render('index');
 });
 // app.get('/about', (req, res)=>{
