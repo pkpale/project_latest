@@ -1,0 +1,55 @@
+<html lang="en">
+    <%- include('partials/head.ejs') %>
+<body>
+    <div class="container-fluid cont ">
+
+            <%- include('partials/nav.ejs') %>  
+
+            <div class="container-fluid back">
+                <div class="container main-cont hidden-sm hidden-xs ">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 xyz jumbotron ">
+                            <!-- <div class="jumbotron"> -->
+                            <!-- <div class="panel panel-title"> -->
+                                <h1 >Hello</h1>
+                            <!-- </div> -->
+                                <p>
+                                    Greetings from IIT BBS, This year focusing on corona crisis, we are having virtually placements.
+                                    Register to the portal and keep yor profile updated.
+                                </p>
+                            
+                        </div>
+                        
+                        <%- include('partials/form.ejs') %>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+      
+    <script>
+        const items = document.getElementsByClassName('ac');
+        // nav = nav[0];
+        // const ul = nav[0];
+        console.log(items[0].classList);
+        for(var i=0;i<items.length;i++)
+        {    
+            items[i].addEventListener('click', function(){
+                  console.log(items.length);
+                    for(var j=0;j<items.length;j++){
+                        // console.log(items[j]);
+                    
+                       items[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    
+                    
+                    
+             }, false);
+        }
+        
+        
+    </script>
+    
+</body>
+</html>
