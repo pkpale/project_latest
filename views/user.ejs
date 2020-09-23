@@ -1,0 +1,126 @@
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs') %>
+
+        <style>
+            .para{
+                background-image: url('download.jpg');
+                background-size: 100% 100%;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                /* height:60%;   */
+                width:100%
+            }
+
+            .showoff{
+                background-color: transparent;
+                height:150px;
+            }
+            .jumbotron{
+                width:100%;
+                border:2px solid red;
+                margin:0;
+            }
+        </style>
+    </head>
+    
+<body>
+    <div class="container-fluid cont " style='padding:0'>
+
+            <%- include('partials/nav.ejs') %>  
+            <div class="container-fluid para">
+
+            </div>
+               
+                <div class="container-fluid para ">
+                    <div class="jumbotron container-fluid" > 
+                
+                    <h2 style='text-align:center'> <%= ravi %> </h2>
+                    <p>
+                       <div class="row" style='text-align: justify; font-size: larger;'>
+                           <div class="col-lg-4">
+                               <div>
+                                   <strong>Email:</strong><i> rs38@iitbbs.ac.in </i>
+                                </div>
+                                <div>
+                                   <strong>phone:</strong><i> 7734820845 </i>
+                                </div>
+                           </div>
+                           <div class="col-lg-4">
+                            <div>
+                                <strong>Location:</strong><i> Morena </i>
+                             </div>
+                             <div>
+                                <strong>linkedin:</strong><i> <a href='#'>linkedin.com/rvishrm </a></i>
+                             </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <strong>Skype:</strong><i> live:rvishrm </i>
+                             </div>
+                             <div>
+                                <strong>graduation-year:</strong><i> 2020 </i>
+                             </div>
+                        </div>
+                       </div>
+                    </p>
+                    </div>
+                    <div class="container showoff">
+
+                    </div>
+                    <div class="jumbotron container-fluid"> 
+                
+                    <h2> Education </h2>
+                        
+                    <div class="row" style='text-align: justify; font-size: larger;'>
+                        <div class="col-lg-12">
+                            <div>
+                                <strong>Email:</strong><i> rs38@iitbbs.ac.in </i>
+                             </div>
+                             <div>
+                                <strong>phone:</strong><i> 7734820845 </i>
+                             </div>
+                        </div>
+                        <div class="col-lg-12">
+                         <div>
+                             <strong>Location:</strong><i> Morena </i>
+                          </div>
+                          <div>
+                             <strong>linkedin:</strong><i> <a href='#'>linkedin.com/rvishrm </a></i>
+                          </div>
+                     </div>
+                     <div class="col-lg-12">
+                         <div>
+                             <strong>Skype:</strong><i> live:rvishrm </i>
+                          </div>
+                          <div>
+                             <strong>graduation-year:</strong><i> 2020 </i>
+                          </div>
+                     </div>
+                    </div>
+                    </div>
+                    <div class="container showoff">
+
+                    </div>
+            </div>
+    </div>
+      
+  
+        <%- include('partials/script.ejs') %>
+         <!-- footer -->
+        <%- include('partials/footer.ejs') %>
+    <script>
+        const icon = document.getElementsByClassName('user-login');
+        // console.log(icon);
+        // icon[0].style.display='none';
+        // console.log();
+        icon[0].childNodes[1].innerText = `Hi,  <%= ravi %> `;
+        icon[0].childNodes[3].innerText = '';
+        icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
+        icon[0].childNodes[1].style='font-size:20px;'
+        
+        // icon[0].firtchild.innerHTML = `<h3> Hi,  <%= ravi %> </h3>`;
+
+    </script>
+</body>
+</html>

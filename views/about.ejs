@@ -1,12 +1,14 @@
 <html lang="en">
-    <%- include('partials/head.ejs') %>
+    <head>
+        <%- include('partials/head.ejs') %>
+    </head>
 <body>
     <div class="container-fluid cont ">
 
             <%- include('partials/nav.ejs') %>  
 
             <div class="container-fluid back">
-                <div class="container main-cont hidden-sm hidden-xs ">
+                <div class="container main-cont  ">
                     <div class="row">
                         <div class="col-xs-12 col-md-6 xyz jumbotron ">
                             <!-- <div class="jumbotron"> -->
@@ -26,7 +28,11 @@
             </div>
     </div>
       
+    
+    <%- include('partials/script.ejs') %>
 
+    <!-- footer  -->
+    <%- include('partials/footer.ejs') %>
     
 </body>
 </html>

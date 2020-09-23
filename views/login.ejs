@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs') %>
+        <style>
+            form{
+                position:relative;
+                top:70px;
+            }
+        </style>
+    </head>
+<body>
+    <div class="container-fluid cont ">
+
+            <%- include('partials/nav.ejs') %>  
+
+            <div class="container-fluid back">
+                <div class="container main-cont ">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 xyz jumbotron ">
+                            <!-- <div class="jumbotron"> -->
+                            <!-- <div class="panel panel-title"> -->
+                                <h1 >Hello</h1>
+                            <!-- </div> -->
+                                <p>
+                                    Greetings from IIT BBS, This year focusing on corona crisis, we are having virtually placements.
+                                    Register to the portal and keep yor profile updated.
+                                </p>
+                            
+                        </div>
+                        
+                        <%- include('partials/loginform.ejs') %>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+      
+  
+        <%- include('partials/script.ejs') %>
+        <%- include('partials/footer.ejs') %>
+</body>
+</html>

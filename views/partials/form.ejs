@@ -2,30 +2,35 @@
     <form action="/" method="POST">
         <div class="form-group">
             <label for="fname">FirstName:</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name='fname'>
         </div>
         <div class="form-group">
             <label for="Lname">LastName:</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name='lname'>
         </div>
         <div class="form-group">
             <label for="rollno">ROll No:</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name='rollno'>
         </div>
         <div class="form-group">
             <label for="Email">Email:</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name='email'>
+        </div>
+        <div class="form-group">
+            <label for="password">password:</label>
+            <input type="password" class="form-control" name='pass'>
         </div>
         <div class="form-group">
             <label for="tel">Phone:</label>
-            <input type="tel" class="form-control">
+            <input type="number" class="form-control" name='tel'>
         </div>
         <div>
             <button class="btn btn-success">
                 Register
             </button>
         </div>
-        <br>
+    </form>
+    <form action="/login" method='GET'>
         <div class='form-group'>
             <p> or already have an account?</p>
             <button class="btn btn-success">
