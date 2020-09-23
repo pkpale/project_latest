@@ -10,7 +10,7 @@ app.listen(process.env.PORT || 3000, (err)=>{
         console.log(err);
     }
     else{
-        console.log('listening');
+        console.log('listening...');
     }
 });
 
