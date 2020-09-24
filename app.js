@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
         console.log('connected');
   });
 
-app.listen(process.env.PORT|| 3000, (err)=>{
+app.listen(3000, (err)=>{
     if(err)
     {
         console.log(err);
@@ -45,7 +45,7 @@ app.post('/',(req,res)=>{
     const data = req.body;
     console.log(data.email);
     
-    connection.query(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}', ${1} , 'sfnks');`, (err)=>{
+    connection.query(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}', ${1} , '${data.pass}');`, (err)=>{
         if(err){
             console.log(err);
         }    
@@ -61,12 +61,27 @@ app.get('/about', (req, res)=>{
 app.get('/login',(req,res)=>{
     res.render('login');
 });
-app.get('/user', (req,res)=>{
-    // console.log(parama)
-    res.render('user',{ravi:'RAVI'});
+app.get('/user',(req,res)=>{
+        res.render('user',{ravi:'RAVI'});
+});
+app.post('/user/:id', (req,res)=>{
+    console.log(req.params.id);
+    var id=req.params.id;
+
+
+
+    connection.query(`select * from student_profile where emailid = "${id}"`,(err, data)=>{
+            console.log(err);    
+        if(data.length === 0)
+                 res.render('profile',{ravi:'RAVI'});
+            else 
+                res.render('user',{ravi:'RAVI'});
+    });
+   
     // console.log(data);
     
 });
 app.get('/contact-us', (req, res)=>{
     res.render('contact');
 });
+

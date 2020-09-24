@@ -38,5 +38,20 @@
   
         <%- include('partials/script.ejs') %>
         <%- include('partials/footer.ejs') %>
+
+        
+<script> 
+    const login=document.getElementById('login');
+    const username=document.getElementById('email');
+    console.log(1);
+    login.addEventListener('click', ()=>{
+        console.log(username.value, 'jandsajndj');
+        const form = document.querySelector('form');
+        form.setAttribute('action', `user/${username.value}`);
+        form.setAttribute('method', 'POST');
+        console.log(form.getAttribute('action'), form.getAttribute('method'));
+    }, false);
+    
+</script>
 </body>
 </html>
