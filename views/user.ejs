@@ -42,31 +42,31 @@
                 <div class="container-fluid para ">
                     <div class="jumbotron container" > 
                 
-                    <h2 style='text-align:center'> <strong> Ravi Sharma</strong> </h2>
+                    <h2 style='text-align:center'> <strong> <%=data1.fname%> <%=data1.lname%></strong> </h2>
                     <p>
                        <div class="row" style='text-align: justify; font-size: larger;'>
                            <div class="col-lg-4">
                                <div>
-                                   <strong>Email:</strong><i> rs38@iitbbs.ac.in </i>
+                                   <strong>Email:</strong><i> <%= data1.emailid %> </i>
                                 </div>
                                 <div>
-                                   <strong>phone:</strong><i> 7734820845 </i>
+                                   <strong>phone:</strong><i> <%=data.tel %> </i>
                                 </div>
                            </div>
                            <div class="col-lg-4">
                             <div>
-                                <strong>Location:</strong><i> Morena </i>
+                                <strong>Location:</strong><i> <%= data.location %> </i>
                              </div>
                              <div>
-                                <strong>linkedin:</strong><i> <a href='#'>linkedin.com/rvishrm </a></i>
+                                <strong>linkedin:</strong><i> <a href='#'><%= data.linkedin_id %> </a></i>
                              </div>
                         </div>
                         <div class="col-lg-4">
                             <div>
-                                <strong>Skype:</strong><i> live:rvishrm </i>
+                                <strong>Skype:</strong><i> <%= data.skype_id %> </i>
                              </div>
                              <div>
-                                <strong>graduation-year:</strong><i> 2020 </i>
+                                <strong>graduation-year:</strong><i> <%= data.graduation_year %> </i>
                              </div>
                         </div>
                        </div>
@@ -91,7 +91,7 @@
                                                         <p>SCHOOL:</p>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <p>IIT BHUBANESWAR  </p>
+                                                        <p><%= data.gschool %>  </p>
                                                     </div>
                                                 </div>
 
@@ -100,7 +100,7 @@
                                                         <p>CGPA:</p>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <p>8.42  </p>
+                                                        <p><%= data.gcgpa  %>  </p>
                                                     </div>
                                                 </div>
 
@@ -109,7 +109,7 @@
                                                         <p>Branck:</p>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <p>Electrical  </p>
+                                                        <p><%=  data.gbranch %>  </p>
                                                     </div>
                                                 </div>
                                     </div>
@@ -124,7 +124,7 @@
                                                 <p>SCHOOL:</p>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p>J.S. Public school  </p>
+                                                <p><%=  data.xiischool %> </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -132,7 +132,7 @@
                                                 <p>CGPA:</p>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p>8.42  </p>
+                                                <p><%= data.xiicgpa %> </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -155,7 +155,7 @@
                                                 <p>SCHOOL:</p>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p>St. Mary's School  </p>
+                                                <p><%= data.xschool %>  </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -163,7 +163,7 @@
                                                 <p>CGPA:</p>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p>10 </p>
+                                                <p><%= data.xcgpa %> </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -179,11 +179,23 @@
                                     <!-- third column ends  -->
 
                             </div>
-
-                    </div>
-                    <div class="container showoff">
-
-                    </div>
+                            <!-- <br><br>
+                            <div style="text-align: center;">
+                            
+                                <form action='/user/edit' method="POST">
+                                    <div class="form-group">
+                                        <label for="text" style="color: black;">Email:</label><br>
+                                        <input name='email' type="text" placeholder="your email">
+                                    </div>
+                                    <button class='btn btn-primary 'style='margin:10px;'> Edit details </button>
+                                </form>
+                                
+                            </div>
+                        <br><br> -->
+                        </div>
+                           
+                    
+                    
             </div>
     </div>
       
@@ -192,17 +204,33 @@
          <!-- footer -->
         <%- include('partials/footer.ejs') %>
     <script>
-        const icon = document.getElementsByClassName('user-login');
-        // console.log(icon);
-        // icon[0].style.display='none';
-        // console.log();
-        icon[0].childNodes[1].innerText = `Hi,  <%= ravi %> `;
-        icon[0].childNodes[3].innerText = '';
-        icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
-        icon[0].childNodes[1].style='font-size:20px;'
+        // const icon = document.getElementsByClassName('user-login');
+        // // console.log(icon);
+        // // icon[0].style.display='none';
+        // // console.log();
+        // icon[0].childNodes[1].innerText = `Hi,   <%= data1.fname %>  `;
+        // icon[0].childNodes[3].innerText = '';
+        // icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
+        // icon[0].childNodes[1].style='font-size:20px;'
         
-        // icon[0].firtchild.innerHTML = `<h3> Hi,  <%= ravi %> </h3>`;
-
+        // // icon[0].firtchild.innerHTML = `<h3> Hi,  ravi  </h3>`;
+        // var input = document.querySelector('form > div > input[type=text]');
+        // console.log(input.value);
+        // var form = document.querySelector('form');
+        // console.log(form);
+        // function  fun(){
+        //     console.log(1);
+        //     if(String(input.value) !== '<%= data1.emailid %>' ){
+        //             console.log(String(input.value) !== '<%= data1.emailid %>' );
+                    
+        //         }
+        //         else{
+        //             form.setAttribute('action', '/user/edit');
+        //             form.setAttribute('method', 'POST');
+        //         }
+        // };
+        // var edit = document.querySelector('button');
+        // edit.addEventListener('click', fun, false);
     </script>
 </body>
 </html>

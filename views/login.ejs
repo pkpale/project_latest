@@ -41,17 +41,40 @@
 
         
 <script> 
-    const login=document.getElementById('login');
-    const username=document.getElementById('email');
-    console.log(1);
-    login.addEventListener('click', ()=>{
-        console.log(username.value, 'jandsajndj');
-        const form = document.querySelector('form');
-        form.setAttribute('action', `user/${username.value}`);
-        form.setAttribute('method', 'POST');
-        console.log(form.getAttribute('action'), form.getAttribute('method'));
-    }, false);
+    // const login=document.getElementById('login');
+    // const username=document.getElementById('email');
+    // console.log(1);
+    // login.addEventListener('click', ()=>{
+    //     console.log(username.value, 'jandsajndj');
+    //     const form = document.querySelector('form');
+    //     // form.setAttribute('action', `user/${username.value}`);
+    //     // form.setAttribute('method', 'GET');
+    //     console.log(form.getAttribute('action'), form.getAttribute('method'));
+    // }, false);
+
+    // var login  = document.querySelector('#login');
     
+    // var email = document.querySelector('#email');
+    // // const endpoint = email.value;
+    // console.log(email.value);
+
+    // login.addEventListener('click',()=>{
+    //         fetch('/user', {
+    //             method:'POST'
+    //         })
+    //         .then (Response=> response.json())
+    //         .then (data=> {
+    //                 if(data.email == false)
+    //                     alert('user does not exist');
+    //                 else if(data.password == false)
+    //                     alert('password doesnot match');
+    //                 else 
+    //                     window.location.href = data.redirect;
+    //             })
+            
+    // })
+    
+
 </script>
 </body>
 </html>

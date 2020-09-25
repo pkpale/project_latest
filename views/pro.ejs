@@ -15,8 +15,9 @@
                 width:100%;
                 padding:0;
                 margin:0;
+                
             }
-
+            
             .showoff{
                 background-color: transparent;
                 height:40%;
@@ -26,10 +27,15 @@
                background-color:#0275d8;
                 color:wheat;
             }
+            form{
+                padding:0;
+                margin:0;
+            }
         </style>
     </head>
     
 <body>
+    <form action="/user/<%= data.emailid %>" method="POST">
     <div class="container-fluid para " style='padding:0'>
 
             <%- include('partials/nav.ejs') %>  
@@ -37,12 +43,12 @@
                 
                         <div class="jumbotron container" > 
                     
-                            <h2 style='text-align:center'> <strong> Ravi Sharma</strong> </h2>
+                            <h2 style='text-align:center'> <strong> <%= data.fname%> <%=data.lname%></strong> </h2>
                             <p>
                             <div class="row" style='text-align: justify; font-size: larger;'>
                                 <div class=" col-md-4 col-lg-4">
                                     <div>
-                                        <strong>Email:</strong><input name='emailid' type="email" class='form-control'> 
+                                        <strong>Email:</strong><i><%=data.emailid%></i> 
                                         </div>
                                         <div>
                                         <strong>phone:</strong><input name='tel' type="tel" class='form-control'>
@@ -50,7 +56,7 @@
                                 </div>
                                 <div class="col-md-4 col-lg-4">
                                     <div>
-                                        <strong>Location:</strong><input name='Location' type="text" class='form-control'>
+                                        <strong>Location:</strong><input name='location' type="text" class='form-control'>
                                     </div>
                                     <div>
                                         <strong>linkedin:</strong><input name='linkedin_id' type="text" class='form-control'>
@@ -67,7 +73,11 @@
                             </div>
                             </p>
                         </div>
-                   
+                        
+                        <div class="showoff">
+                            
+                        </div>
+
                         <div class="jumbotron container"> 
                 
                             <h1> Education </h1>
@@ -77,7 +87,7 @@
                                     <div class="row" style='text-align: justify; font-size: larger;'>
                                         <div class=" col-md-4 col-lg-4">
                                             <div>
-                                                <strong>College:</strong><input name='emailid' type="email" class='form-control'> 
+                                                <strong>College:</strong><input name='gschool' type="text" class='form-control'> 
                                                 </div>
                                                 <!-- <div>
                                                 <strong>phone:</strong><input name='tel' type="tel" class='form-control'>
@@ -85,7 +95,7 @@
                                         </div>
                                         <div class="col-md-4 col-lg-4">
                                             <div>
-                                                <strong>CGPA:</strong><input name='Location' type="text" class='form-control'>
+                                                <strong>CGPA:</strong><input name='gcgpa' type="text" class='form-control'>
                                             </div>
                                             <!-- <div>
                                                 <strong>linkedin:</strong><input name='linkedin_id' type="text" class='form-control'>
@@ -93,7 +103,7 @@
                                         </div>
                                         <div class="col-md-4 col-lg-4">
                                             <div>
-                                                <strong>branch:</strong><input name='skype_id' type="text" class='form-control'>
+                                                <strong>branch:</strong><input name='gbranch' type="text" class='form-control'>
                                             </div>
                                             <!-- <div>
                                                 <strong>graduation-year:</strong><input name='graduation_year' type="text" class='form-control'>
@@ -111,7 +121,7 @@
                                         <div class="row" style='text-align: justify; font-size: larger;'>
                                             <div class=" col-md-4 col-lg-4">
                                                 <div>
-                                                    <strong>School:</strong><input name='emailid' type="email" class='form-control'> 
+                                                    <strong>School:</strong><input name='xiischool' type="text" class='form-control'> 
                                                 </div>
                                                 <!-- <div>
                                                     <strong>phone:</strong><input name='tel' type="tel" class='form-control'>
@@ -119,7 +129,7 @@
                                             </div>
                                             <div class="col-md-4 col-lg-4">
                                                 <div>
-                                                <strong>CGPA:</strong><input name='Location' type="text" class='form-control'>
+                                                <strong>CGPA:</strong><input name='xiicgpa' type="text" class='form-control'>
                                                 </div>
                                                 <!-- <div>
                                                 <strong>linkedin:</strong><input name='linkedin_id' type="text" class='form-control'>
@@ -143,7 +153,7 @@
                                     <div class="row" style='text-align: justify; font-size: larger;'>
                                         <div class=" col-md-4 col-lg-4">
                                             <div>
-                                                <strong>School:</strong><input name='emailid' type="email" class='form-control'> 
+                                                <strong>School:</strong><input name='xschool' type="text" class='form-control'> 
                                             </div>
                                                 <!-- <div>
                                                 <strong>phone:</strong><input name='tel' type="tel" class='form-control'>
@@ -151,7 +161,7 @@
                                         </div>
                                         <div class="col-md-4 col-lg-4">
                                             <div>
-                                                <strong>CGPA:</strong><input name='Location' type="text" class='form-control'>
+                                                <strong>CGPA:</strong><input name='xcgpa' type="text" class='form-control'>
                                             </div>
                                             <!-- <div>
                                                 <strong>linkedin:</strong><input name='linkedin_id' type="text" class='form-control'>
@@ -170,33 +180,54 @@
                         </div>
                                 
                                     <!-- third column ends  -->
-                            <br><br>
-                        <div style="text-align: center;">
-                            <form action="/user" method="GET">
-                                <button class='btn btn-success'>Save Details</button>
-                            </form>
-                        </div>
+                         <br><br>
+                            <div style="text-align: center;">
+                            
+                                    
+                                    <button class='btn btn-primary btn-lg'>Save Details for <%=data.emailid%></button>
+                                
+                            </div>
+                        <br><br>
+                        
+
                 </div>
     </div>
+</form>
       
   
-        <%- include('partials/script.ejs') %>
-         <!-- footer -->
-        <%- include('partials/footer.ejs') %>
-
-    <!-- <script>
+        <!--  include('partials/script.ejs')  -->
+         <!-- footer -->\
+         <footer>
+            <div >
+               <!-- <a href='linkedin.com/in/rvishrm/'> -->
+                <a href='http://linkedin.com/in/rvishrm/''>
+                    <i class="fa fa-linkedin" ></i>
+                </a>
+               <a href='https://twitter.com/rvishrm'>
+                    <i class="fa fa-twitter" ></i>
+                </a>
+               <!-- use of http is must -->
+                <a href='https://www.instagram.com/i_m_rs_38/'>
+                    <i class="fa fa-instagram"></i>
+                </a>   
+            </div>
+            <div>
+                copyright &copy; rvishrm 2020
+            </div>
+        </footer>
+    <script>
         const icon = document.getElementsByClassName('user-login');
         // console.log(icon);
         // icon[0].style.display='none';
         // console.log();
-        icon[0].childNodes[1].innerText = `Hi,  <%= ravi %> `;
+        icon[0].childNodes[1].innerText = `Hi,  <%= data.fname %> `;
         icon[0].childNodes[3].innerText = '';
         icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
         icon[0].childNodes[1].style='font-size:20px;'
         
-        // icon[0].firtchild.innerHTML = `<h3> Hi,  <%= ravi %> </h3>`;
+        // icon[0].firtchild.innerHTML = `<h3> Hi,  <= ravi > </h3>`;
 
-    </script> -->
+    </script>
 </body>
 </html>
 
