@@ -1,27 +1,29 @@
 const express = require('express');
-
+// con
 const app = express();
-
-const mysql = require('mysql');
+const sqlite3 = require('sqlite3').verbose();
+// const mysql = require('mysql');
 
 app.use(express.urlencoded({extended:true}));
 
-var connection = mysql.createConnection({
-    //properties... 
-    connectionLimit:50, // at a time only receive 50 query requests.
-    host: 'localhost',
-    user:'root',
-    password:'Ravi#2016',
-    database:'campus'
+//connecting sqlite
+
+let db = new sqlite3.Database('./database.db', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the database.');
   });
+
+
+  // creating table student_profile
+//   db.run('create table student_profile(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), tel varchar(10), location varchar(20), linkedin_id varchar(50),  skype_id varchar(50),    graduation_year year(4),   gschool varchar(20),    gcgpa varchar(10),    gbranch varchar(20),    xiischool varchar(20),  xiicgpa varchar(10),     xschool varchar(20),    xcgpa varchar(10) );');
+
+// creatint table student 
+//   db.run('create table student(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), rollno varchar(20), pass varchar(30), tel char(10))')
   
-  connection.connect((err)=>{
-      if(err){
-        console.log(err);
-      }
-      else 
-        console.log('connected');
-  });
+  
+
 
 app.listen( process.env.PORT || 3000, (err)=>{
     if(err)
@@ -34,26 +36,37 @@ app.listen( process.env.PORT || 3000, (err)=>{
 });
 
 app.set('view engine' , 'ejs');
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 app.get('/', (req, res)=>{
 
     res.render('index');
 });
-
+app.post('/check', (req,res)=>{
+    const inp = JSON.parse(req.headers.data);
+    console.log(inp.email)
+    var obj ={
+        email:true,
+        pass:false
+    }
+    db.run(`select * from student where emailid = '${inp.email}'`, (err, data)=>{
+        if(!data) // if undefined
+            obj.email = false;
+        else if(inp.pass == data[0].pass)
+            obj.pass = true;
+        res.json(obj);
+    });
+});
 app.post('/',(req,res)=>{
-    console.log(req.body);
-    const data = req.body;
+    const data = JSON.parse(req.headers.data);
     console.log(data.email);
-    
-    connection.query(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}', ${1} , '${data.pass}');`, (err)=>{
+    db.run(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}',  '${data.pass}', ${data.tel});`, (err)=>{
         if(err){
-            console.log(err);
+            console.log(err);   
         }    
         else
             console.log('record added');
+        res.json({redirect:'/login'});
     });
-    res.redirect('login');
-    res.end();
 });
 app.get('/about', (req, res)=>{
     res.render('about');
@@ -61,79 +74,93 @@ app.get('/about', (req, res)=>{
 app.get('/login',(req,res)=>{
     res.render('login');
 });
-// app.get('/user',(req,res)=>{
-//         res.render('user',{ravi:'RAVI'});
-// });
 
-// app.post('/user/edit', (req,res)=>{
-//     // console.log(req.params.id);
-//     let id=req.body.email;
-//     console.log(req.body)
-//     console.log(2);
-//     connection.query(`select * from student_profile where emailid = "${id}"`,(err, data)=>{
-//                     console.log(err);  
-//                     console.log(`/user/${id}`);  
-//                 //var data1;
-//                 connection.query(`select * from student where emailid = '${id}'`, (err, data1)=>{
-//                         if(err){
-//                             console.log(err);
-//                         }
-//                         console.log(data1);
-                              
-//                         res.render('pro',{data:data1[0]});
-//                 });
-               
-//     });
-// });
-app.post('/user', (req,res)=>{
-    // console.log(req.params.id);
-    var id=req.body.email;
-  
-    connection.query(`select * from student_profile where emailid = "${id}"`,(err, data)=>{
-                    console.log(err);  
-                    // console.log(`/user/${id}`);  
-                //var data1;
-                connection.query(`select * from student where emailid = '${id}'`, (err, data1)=>{
-                        if(err){
-                            console.log(err);
-                        }
-                        console.log(data1);
-                        if(data.length === 0)
-                        {   
-                            if(data1.length === 0)
-                                res.render('index');
-                            else    
-                                res.render('pro',{data:data1[0]});
-                        }
-                    else 
-                        {      
-                            console.log(data[0].emailid);
-                            res.render('user',{data:data[0], data1:data1[0]});
-                        }
-
-                });
-               
-        });
-    
-});
 
 app.get('/contact-us', (req, res)=>{
     res.render('contact');
 });
 
-app.post('/user/:id', (req,res)=>{
-        console.log(req.params.id);
-        console.log(req.body);
-        var data=req.body;
-        console.log(1);
-        var id = req.params.id;
-        connection.query(`select * from student where emailid = '${id}'`, (err, data1)=>{        
-            connection.query(`insert into student_profile values('${id}','${data1[0].fname}','${data1[0].lname}',${data.tel},'${data.location}','${data.linkedin_id}','${data.skype_id}','${data.graduation_year}','${data.gschool}','${data.gcgpa}','${data.gbranch}','${data.xiischool}','${data.xiicgpa}','${data.xschool}','${data.xcgpa}');`,(err)=>{
-                if(err)
-                    console.log(err);
-                else
-                    res.render('user',{data:req.body, data1:data1[0]});
-            });
+app.get('/user/:id',(req,res)=>{
+    console.log(req.url);
+    const id = req.params.id;
+    console.log('india');
+    db.get(`select * from student_profile where emailid = "${id}"`,(err, data)=>{
+        db.get(`select * from student where emailid = '${id}'`, (err, data1)=>{
+            if(!data)
+            {
+                res.render('pro',{data:data1});
+            }
+            else{
+                res.render('user',{data:data, data1:data1});
+            }
+            
+            console.log(data);
         });
-   
     });
+});
+
+
+app.post('/user/:id', (req,res)=>{
+    
+
+    console.log('2020');
+    console.log(req.url);
+        var pass = (req.headers.password);
+        var id = req.params.id;
+        console.log('****');
+        var obj =  {email:true, password:false, redirect:`/user/${id}`};
+        console.log(obj.redirect);
+        var sql = `select * from student where emailid = '${id}';`;
+        db.get(sql, (err, data)=>{        
+    //    res.setHeader('content-type')
+            console.log(sql);
+    console.log(data);
+            if(!data)
+                obj.email = false;
+            else if(data.pass == pass)
+                obj.password=true;
+        res.json(obj);
+        // res.end();
+        });
+       
+    });
+app.post('/:id', (req,res)=>{
+    const id = req.params.id;
+    console.log(req.body);
+    const form = req.body;
+    db.get(`select * from student where emailid = '${id}'`, (err, data)=>{        
+        data = data;
+        db.run(`insert into student_profile values( '${data.emailid}' , '${data.fname}', '${data.lname}', ${form.tel},'${form.location}','${form.linkedin_id}', '${form.skype_id}','${form.graduation_year}','${form.gschool}','${form.gcgpa}','${form.gbranch}', '${form.xiischool}','${form.xiicgpa}','${form.xschool}','${form.xcgpa}');`, (err)=>{
+            if(err){
+                console.log(err);   
+                console.log(data);
+            }    
+            else
+                console.log('record added');
+            res.redirect('/login');
+        });
+
+    });
+});
+
+
+app.post('/edit/:id', (req,res) =>{
+    const id = req.params.id;
+
+    const email = req.body.email;
+    if(email != id)
+    {
+        res.json('enter correct emailid');
+    }
+    else
+        db.get(`select * from student where emailid = '${id}'`, (err, data1)=>{
+        
+            if(err)
+                console.log(err);
+            else{
+                //    connection
+                    res.render('pro', {data:data1});
+            }
+        });
+    
+});

@@ -7,7 +7,7 @@
                 padding:0
             }
             .para{
-                background-image: url('Campus-of-Indian-Institute-of-Technology-Bhubaneswar_Campus-View.png');
+                background-image: url('/Campus-of-Indian-Institute-of-Technology-Bhubaneswar_Campus-View.png');
                 background-size: 100% 100%;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
@@ -35,7 +35,7 @@
     </head>
     
 <body>
-    <form action="/user/<%= data.emailid %>" method="POST">
+    <form action="/<%= data.emailid %>" method="POST">
     <div class="container-fluid para " style='padding:0'>
 
             <%- include('partials/nav.ejs') %>  
@@ -195,26 +195,9 @@
 </form>
       
   
-        <!--  include('partials/script.ejs')  -->
-         <!-- footer -->\
-         <footer>
-            <div >
-               <!-- <a href='linkedin.com/in/rvishrm/'> -->
-                <a href='http://linkedin.com/in/rvishrm/''>
-                    <i class="fa fa-linkedin" ></i>
-                </a>
-               <a href='https://twitter.com/rvishrm'>
-                    <i class="fa fa-twitter" ></i>
-                </a>
-               <!-- use of http is must -->
-                <a href='https://www.instagram.com/i_m_rs_38/'>
-                    <i class="fa fa-instagram"></i>
-                </a>   
-            </div>
-            <div>
-                copyright &copy; rvishrm 2020
-            </div>
-        </footer>
+        <!--  include('partials/sc`ript.ejs')  -->
+         <!-- footer -->
+         <%- include('partials/footer.ejs') %>
     <script>
         const icon = document.getElementsByClassName('user-login');
         // console.log(icon);

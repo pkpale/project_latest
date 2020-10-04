@@ -9,6 +9,9 @@
         </style>
     </head>
 <body>
+    <div class="practice">
+
+    </div>
     <div class="container-fluid cont ">
 
             <%- include('partials/nav.ejs') %>  
@@ -41,38 +44,53 @@
 
         
 <script> 
-    // const login=document.getElementById('login');
-    // const username=document.getElementById('email');
-    // console.log(1);
-    // login.addEventListener('click', ()=>{
-    //     console.log(username.value, 'jandsajndj');
-    //     const form = document.querySelector('form');
-    //     // form.setAttribute('action', `user/${username.value}`);
-    //     // form.setAttribute('method', 'GET');
-    //     console.log(form.getAttribute('action'), form.getAttribute('method'));
-    // }, false);
 
-    // var login  = document.querySelector('#login');
+    var login  = document.querySelector('#login');
     
-    // var email = document.querySelector('#email');
-    // // const endpoint = email.value;
-    // console.log(email.value);
-
-    // login.addEventListener('click',()=>{
-    //         fetch('/user', {
-    //             method:'POST'
-    //         })
-    //         .then (Response=> response.json())
-    //         .then (data=> {
-    //                 if(data.email == false)
-    //                     alert('user does not exist');
-    //                 else if(data.password == false)
-    //                     alert('password doesnot match');
-    //                 else 
-    //                     window.location.href = data.redirect;
-    //             })
-            
-    // })
+    var email = document.querySelector('#email');
+    function triggerAlert(data){
+        document.getElementsByClassName('alert-success')[0].style.display = "none";
+        
+        document.getElementsByClassName('alert-danger')[0].style.display = "";
+        document.getElementsByClassName('alert-danger')[0].innerText = data;
+        setTimeout(()=>{
+                    document.getElementsByClassName('alert-danger')[0].style.display = "none";
+        
+        }, 3000);
+                
+    }
+    console.log(email.value);
+    login.addEventListener('click', ()=>{
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    if(data.email == false)
+                        {
+                            triggerAlert('Oops... email is not registered');
+                        }
+                    else if(data.password == false)
+                    {
+                        triggerAlert('Wrong password');                          
+                    }
+                    else 
+                        {
+                            document.getElementsByClassName('alert-success')[0].style.display="";
+                            document.getElementsByClassName('alert-danger')[0].style.display="none";
+                            document.getElementsByClassName('alert-success')[0].innerText = 'Login Successful | redirecting...';
+                            setTimeout(()=>{
+                                window.location.href=data.redirect;
+                            },2000);
+                        }
+                       
+                }
+        };
+        xhttp.open("POST", `/user/${email.value}`, true);
+    
+        xhttp.setRequestHeader("password",`${document.getElementById('pass').value}`);
+        
+        xhttp.send();
+    });
     
 
 </script>

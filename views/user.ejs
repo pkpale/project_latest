@@ -7,7 +7,7 @@
                 padding:0
             }
             .para{
-                background-image: url('Campus-of-Indian-Institute-of-Technology-Bhubaneswar_Campus-View.png');
+                background-image: url('/Campus-of-Indian-Institute-of-Technology-Bhubaneswar_Campus-View.png');
                 background-size: 100% 100%;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
@@ -182,7 +182,7 @@
                             <!-- <br><br>
                             <div style="text-align: center;">
                             
-                                <form action='/user/edit' method="POST">
+                                <form action='/edit/<%= data.emailid %>' method="POST">
                                     <div class="form-group">
                                         <label for="text" style="color: black;">Email:</label><br>
                                         <input name='email' type="text" placeholder="your email">
@@ -204,6 +204,16 @@
          <!-- footer -->
         <%- include('partials/footer.ejs') %>
     <script>
+          const icon = document.getElementsByClassName('user-login');
+        // console.log(icon);
+        // icon[0].style.display='none';
+        // console.log();
+        icon[0].childNodes[1].innerText = `Hi,  <%= data1.fname %> `;
+        icon[0].childNodes[3].innerText = '';
+        icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
+        icon[0].childNodes[1].style='font-size:20px;'
+        
+        // icon[0].firtchild.innerHTML = `<h3> Hi,  <= ravi > </h3>`;
         // const icon = document.getElementsByClassName('user-login');
         // // console.log(icon);
         // // icon[0].style.display='none';
