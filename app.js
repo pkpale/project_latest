@@ -59,7 +59,7 @@ app.post('/check', (req,res)=>{
 app.post('/',(req,res)=>{
     const data = JSON.parse(req.headers.data);
     console.log(data.email);
-    db.run(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}',  '${data.pass}', ${data.tel});`, (err)=>{
+    db.run(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}',  '${data.pass}', '${data.tel}');`, (err)=>{
         if(err){
             console.log(err);   
         }    

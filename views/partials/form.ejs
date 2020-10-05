@@ -13,12 +13,12 @@
             <input type="text" class="form-control" name='rollno' maxlength="20">
         </div>
         <div class="form-group">
-            <label for="Email">Email<span style="color: red;">*</span>:</label>
+            <label for="Email">Email<span style="color: red;">*</span>: <span style="color: blue;">(for now it won't verify you as a student of iitbbs, just use '@iitbbs.ac.in' at the end)</span></label>
             <input type="text" class="form-control" name='email' maxlength="20" placeholder="example@iitbbs.ac.in">
         </div>
         <div class="form-group">
             <label for="password">password<span style="color: red;">*</span>:</label>
-            <input type="password" class="form-control" name='pass' maxlength="30">
+            <input type="password" class="form-control" name='pass' maxlength="30" minlength="5">
         </div>
         <div class="form-group">
             <label for="tel">Phone<span style="color: red;">*</span>:</label>
@@ -76,7 +76,7 @@
     const reg=document.getElementsByClassName('btn-success')[0];
     
     function validation(){
-            var fn=true, ln=true, e=true, r=true, p=true, t=true;
+            var fn=true, ln=true, e=true, r=true, p=true, t=true, p = true;
             var email=String(document.getElementsByName('email')[0].value);
             var index = email.indexOf('@');
             
@@ -117,10 +117,16 @@
                    triggerAlert('Please use iitbbs email id');
                     
                 }
+            else if(document.getElementsByName('pass')[0].value.trim().length < 5)
+            {
+                p = false;
+                triggerAlert('password should be atleast 5 characters long');
+                
+            }
             
            
                 console.log(1);
-            if(fn && ln && e && t && r)
+            if(fn && ln && e && t && r && p)
             return  true;
             else return false;
             
