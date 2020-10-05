@@ -25,7 +25,7 @@
                 width:100%;
                background-color:#0275d8;
                
-                color:wheat;
+                color:white;
                
             }
         </style>
@@ -65,7 +65,7 @@
                                 <strong>Location:</strong><i> <%= data.location %> </i>
                              </div>
                              <div>
-                                <strong>linkedin:</strong><i> <a href='#'><%= data.linkedin_id %> </a></i>
+                                <strong>linkedin:</strong><i> <a class="btn btn-primary btn-xs" href='<%= data.linkedin_id %>'> LinkedIn </a></i>
                              </div>
                         </div>
                         <div class="col-lg-4">
@@ -191,7 +191,7 @@
                         </div>
                         <div class="showoff" style="text-align: center; height:20%">
                             <br><br>
-                            <a href='/edit/<%=data.emailid%>' ><button class="btn btn-success">Edit profile</button> </a>
+                            <a href='/edit/<%=data.emailid%>' ><button class="btn btn-success btn-lg">Edit profile</button> </a>
                         </div>
                     
                     
