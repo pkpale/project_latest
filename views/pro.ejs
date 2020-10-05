@@ -35,6 +35,11 @@
     </head>
     
 <body>
+<script>
+    
+    if(String(sessionStorage.getItem('status')) == 'null')
+        window.location.href = '/login';
+</script>
     <form action="/<%= data.emailid %>" method="POST">
     <div class="container-fluid para " style='padding:0'>
 
@@ -198,19 +203,7 @@
         <!--  include('partials/sc`ript.ejs')  -->
          <!-- footer -->
          <%- include('partials/footer.ejs') %>
-    <script>
-        const icon = document.getElementsByClassName('user-login');
-        // console.log(icon);
-        // icon[0].style.display='none';
-        // console.log();
-        icon[0].childNodes[1].innerText = `Hi,  <%= data.fname %> `;
-        icon[0].childNodes[3].innerText = '';
-        icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
-        icon[0].childNodes[1].style='font-size:20px;'
-        
-        // icon[0].firtchild.innerHTML = `<h3> Hi,  <= ravi > </h3>`;
-
-    </script>
+   
 </body>
 </html>
 

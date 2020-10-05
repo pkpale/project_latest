@@ -26,7 +26,7 @@
                             <!-- </div> -->
                                 <p>
                                     Greetings from IIT BBS, This year focusing on corona crisis, we are having virtually placements.
-                                    Register to the portal and keep yor profile updated.
+                                    Register to the portal and keep your profile updated.
                                 </p>
                             
                         </div>
@@ -60,37 +60,48 @@
                 
     }
     console.log(email.value);
-    login.addEventListener('click', ()=>{
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var data = JSON.parse(this.responseText);
-                    if(data.email == false)
-                        {
-                            triggerAlert('Oops... email is not registered');
-                        }
-                    else if(data.password == false)
-                    {
-                        triggerAlert('Wrong password');                          
-                    }
-                    else 
-                        {
-                            document.getElementsByClassName('alert-success')[0].style.display="";
-                            document.getElementsByClassName('alert-danger')[0].style.display="none";
-                            document.getElementsByClassName('alert-success')[0].innerText = 'Login Successful | redirecting...';
-                            setTimeout(()=>{
-                                window.location.href=data.redirect;
-                            },2000);
-                        }
-                       
-                }
-        };
-        xhttp.open("POST", `/user/${email.value}`, true);
+
     
-        xhttp.setRequestHeader("password",`${document.getElementById('pass').value}`);
+    login.addEventListener('click', ()=>{
+
+        // if(sessionStorage.getItem('status') == null)
         
-        xhttp.send();
-    });
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = JSON.parse(this.responseText);
+                            if(data.email == false)
+                                {
+                                    triggerAlert('Oops... email is not registered');
+                                }
+                            else if(data.password == false)
+                            {
+                                triggerAlert('Wrong password');                          
+                            }
+                            else 
+                                {
+                                    sessionStorage.setItem('status','loggedIn');
+                                    sessionStorage.setItem('redirect', `${data.redirect}`);
+                                    document.getElementsByClassName('alert-success')[0].style.display="";
+                                    document.getElementsByClassName('alert-danger')[0].style.display="none";
+                                    document.getElementsByClassName('alert-success')[0].innerText = 'Login Successful | redirecting...';
+                                    setTimeout(()=>{
+                                        window.location.href=data.redirect;
+                                    },2000);
+                                }
+                            
+                        }
+                };
+                xhttp.open("POST", `/user/${email.value}`, true);
+            
+                xhttp.setRequestHeader("password",`${document.getElementById('pass').value}`);
+                
+                xhttp.send();
+            });
+        // else{
+        //         // window.location.href = sessionStorage.getItem('redirect');
+        // }
+        
     
 
 </script>

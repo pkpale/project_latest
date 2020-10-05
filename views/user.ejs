@@ -32,6 +32,13 @@
     </head>
     
 <body>
+       
+<script>
+    
+    if(String(sessionStorage.getItem('status')) == 'null')
+        window.location.href = '/login';
+</script>
+
     <div class="container-fluid cont " style='padding:0'>
 
             <%- include('partials/nav.ejs') %>  
@@ -179,19 +186,6 @@
                                     <!-- third column ends  -->
 
                             </div>
-                            <!-- <br><br>
-                            <div style="text-align: center;">
-                            
-                                <form action='/edit/<%= data.emailid %>' method="POST">
-                                    <div class="form-group">
-                                        <label for="text" style="color: black;">Email:</label><br>
-                                        <input name='email' type="text" placeholder="your email">
-                                    </div>
-                                    <button class='btn btn-primary 'style='margin:10px;'> Edit details </button>
-                                </form>
-                                
-                            </div>
-                        <br><br> -->
                         </div>
                            
                     
@@ -203,45 +197,7 @@
         <%- include('partials/script.ejs') %>
          <!-- footer -->
         <%- include('partials/footer.ejs') %>
-    <script>
-          const icon = document.getElementsByClassName('user-login');
-        // console.log(icon);
-        // icon[0].style.display='none';
-        // console.log();
-        icon[0].childNodes[1].innerText = `Hi,  <%= data1.fname %> `;
-        icon[0].childNodes[3].innerText = '';
-        icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
-        icon[0].childNodes[1].style='font-size:20px;'
         
-        // icon[0].firtchild.innerHTML = `<h3> Hi,  <= ravi > </h3>`;
-        // const icon = document.getElementsByClassName('user-login');
-        // // console.log(icon);
-        // // icon[0].style.display='none';
-        // // console.log();
-        // icon[0].childNodes[1].innerText = `Hi,   <%= data1.fname %>  `;
-        // icon[0].childNodes[3].innerText = '';
-        // icon[0].childNodes[1].classList.add('navbar-text');//='verticle-align:middle'
-        // icon[0].childNodes[1].style='font-size:20px;'
-        
-        // // icon[0].firtchild.innerHTML = `<h3> Hi,  ravi  </h3>`;
-        // var input = document.querySelector('form > div > input[type=text]');
-        // console.log(input.value);
-        // var form = document.querySelector('form');
-        // console.log(form);
-        // function  fun(){
-        //     console.log(1);
-        //     if(String(input.value) !== '<%= data1.emailid %>' ){
-        //             console.log(String(input.value) !== '<%= data1.emailid %>' );
-                    
-        //         }
-        //         else{
-        //             form.setAttribute('action', '/user/edit');
-        //             form.setAttribute('method', 'POST');
-        //         }
-        // };
-        // var edit = document.querySelector('button');
-        // edit.addEventListener('click', fun, false);
-    </script>
 </body>
 </html>
 

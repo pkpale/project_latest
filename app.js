@@ -48,10 +48,10 @@ app.post('/check', (req,res)=>{
         email:true,
         pass:false
     }
-    db.run(`select * from student where emailid = '${inp.email}'`, (err, data)=>{
+    db.get(`select * from student where emailid = '${inp.email}'`, (err, data)=>{
         if(!data) // if undefined
             obj.email = false;
-        else if(inp.pass == data[0].pass)
+        else if(inp.pass == data.pass)
             obj.pass = true;
         res.json(obj);
     });

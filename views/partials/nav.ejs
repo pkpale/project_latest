@@ -25,18 +25,38 @@
                 <li class=" ac"><a href='/about'>About</a></li>
                 <li class=" ac"><a href='/contact-us'>Contact us</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right hidden-xs user-login">
-                <li><a href="/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <ul class="nav navbar-nav navbar-right user-login">
+                <li ><a href="/"><span class="glyphicon glyphicon-user "></span> Sign Up</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
-        </div>
-    
-        <div class="visible-xs float-right ">
-            <ul class="nav navbar-nav user-login">
-                <li style='float:right'><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li style='float:right'><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <ul class="nav navbar-nav navbar-right user-login" style="display: none;">
+               
+                <li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </div>
     
 </nav>
+
+
+<script>
+    const icon = document.getElementsByClassName('user-login');
+     
+        if(String(sessionStorage.getItem('status')) == "null" ){
+            icon[0].style.display="";
+            icon[1].style.display = "none";
+            console.log('nav');
+
+        }
+        else{
+            console.log('nav5445454');
+            icon[0].style.display="none";
+            icon[1].style.display = "";
+            icon[1].addEventListener('click', ()=>{
+                sessionStorage.setItem('status',null);
+                console.log("jksbdkanssssssssssssssssssssssssssssssssssssssss");
+                window.location.href = '/login';
+            });
+        }    
+      
+</script>

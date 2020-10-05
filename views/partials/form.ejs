@@ -35,18 +35,32 @@
     <div class="alert alert-danger" style="display:none">Oops... this email is not registered.</div>
             
     <div class="alert alert-success" style="display:none">correct email</div>
-    <form action="/login" method='GET'>
+
+   
         <div class='form-group'>
             <p> or already have an account?</p>
-            <button class="btn btn-success">
+            <button class="btn btn-success login">
                 Login
             </button>
         </div>
-    </form>
+    
 </div>
 
 <script>
-   
+    const login = document.getElementsByClassName('login')[0];
+    console.log(login);
+    login.addEventListener('click',()=>{
+        if(String(sessionStorage.getItem('status')) == "null")
+        {
+            console.log(typeof sessionStorage.getItem('status'), 'badhasbjdbajkbsahbdhsabdjkasnxjkasnj');
+            window.location.href = '/login';
+        }
+        else{
+            console.log('redirect');
+            window.location.href = sessionStorage.getItem('redirect');
+        }
+    });
+
     function triggerAlert(data){
         document.getElementsByClassName('alert-success')[0].style.display = "none";
         
@@ -64,7 +78,8 @@
     function validation(){
             var fn=true, ln=true, e=true, r=true, p=true, t=true;
             var email=String(document.getElementsByName('email')[0].value);
-
+            var index = email.indexOf('@');
+            
              if(document.getElementsByName('fname')[0].value.trim() == "")
                 {
                     fn = false;
@@ -92,9 +107,10 @@
                     triggerAlert("email can't be empty");
                     
                 }
-            else if(!email.includes('@iitbbs.ac.in'))
+            else if(email.slice(index, email.length) != "@iitbbs.ac.in")
                 {
                     e = false;
+                    console.log(email.slice(index, email.length-1));
                    
                    triggerAlert('Please use iitbbs email id');
                     
@@ -165,5 +181,6 @@
            
             },false);
             
+    
     
 </script>
