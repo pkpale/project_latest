@@ -17,9 +17,9 @@ let db = new sqlite3.Database('./database.db', (err) => {
 
 
   // creating table student_profile
-//   db.run('create table student_profile(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), tel varchar(10), location varchar(20), linkedin_id varchar(50),  skype_id varchar(50),    graduation_year year(4),   gschool varchar(20),    gcgpa varchar(10),    gbranch varchar(20),    xiischool varchar(20),  xiicgpa varchar(10),     xschool varchar(20),    xcgpa varchar(10) );');
-
-// creatint table student 
+//   db.run('create table student_profile(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), tel varchar(10), location varchar(20), linkedin_id varchar(50),  skype_id varchar(50),    graduation_year varchar(4),   gschool varchar(20),    gcgpa varchar(10),    gbranch varchar(20),    xiischool varchar(20),  xiicgpa varchar(10),     xschool varchar(20),    xcgpa varchar(10) );');
+// db.run('drop table student_profile');
+// creating table student 
 //   db.run('create table student(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), rollno varchar(20), pass varchar(30), tel char(10))')
   
   
@@ -75,7 +75,22 @@ app.get('/login',(req,res)=>{
     res.render('login');
 });
 
-
+app.get('/edit/:id', (req,res)=>{
+    const id = req.params.id;
+    db.run(`delete from student_profile where emailid = '${id}'`, (err)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+                db.get(`select * from student where emailid = '${id}'`, (err, data1)=>{
+                    
+                        res.render('pro',{data:data1});
+                    
+                });
+           
+        }
+    });
+});
 app.get('/contact-us', (req, res)=>{
     res.render('contact');
 });
@@ -84,7 +99,9 @@ app.get('/user/:id',(req,res)=>{
     console.log(req.url);
     const id = req.params.id;
     console.log('india');
+    
     db.get(`select * from student_profile where emailid = "${id}"`,(err, data)=>{
+
         db.get(`select * from student where emailid = '${id}'`, (err, data1)=>{
             if(!data)
             {
@@ -130,14 +147,14 @@ app.post('/:id', (req,res)=>{
     const form = req.body;
     db.get(`select * from student where emailid = '${id}'`, (err, data)=>{        
         data = data;
-        db.run(`insert into student_profile values( '${data.emailid}' , '${data.fname}', '${data.lname}', ${form.tel},'${form.location}','${form.linkedin_id}', '${form.skype_id}','${form.graduation_year}','${form.gschool}','${form.gcgpa}','${form.gbranch}', '${form.xiischool}','${form.xiicgpa}','${form.xschool}','${form.xcgpa}');`, (err)=>{
+        db.run(`insert into student_profile values( '${data.emailid}' , '${data.fname}', '${data.lname}', '${form.tel}','${form.location}','${form.linkedin_id}', '${form.skype_id}','${form.graduation_year}','${form.gschool}','${form.gcgpa}','${form.gbranch}', '${form.xiischool}','${form.xiicgpa}','${form.xschool}','${form.xcgpa}');`, (err)=>{
             if(err){
                 console.log(err);   
                 console.log(data);
             }    
             else
                 console.log('record added');
-            res.redirect('/login');
+            res.redirect(`/user/${id}`);
         });
 
     });
