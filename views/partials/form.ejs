@@ -115,6 +115,12 @@
                    triggerAlert('Please use iitbbs email id');
                     
                 }
+            else  if(document.getElementsByName('tel')[0].value.length != 10)
+                {
+                    fn = false;
+                    triggerAlert("phone number should be of 10 digits");
+                    
+                }
            
                 console.log(1);
             if(fn && ln && e && t && r)
