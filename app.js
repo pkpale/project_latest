@@ -1,5 +1,5 @@
 const express = require('express');
-// con
+const crypto = require('crypto');
 const app = express();
 const sqlite3 = require('sqlite3').verbose();
 // const mysql = require('mysql');
@@ -18,9 +18,9 @@ let db = new sqlite3.Database('./database.db', (err) => {
 
   // creating table student_profile
 //   db.run('create table student_profile(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), tel varchar(10), location varchar(20), linkedin_id varchar(50),  skype_id varchar(50),    graduation_year varchar(4),   gschool varchar(20),    gcgpa varchar(10),    gbranch varchar(20),    xiischool varchar(20),  xiicgpa varchar(10),     xschool varchar(20),    xcgpa varchar(10) );');
-// db.run('drop table student_profile');
+// db.run('drop table student');
 // creating table student 
-//   db.run('create table student(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), rollno varchar(20), pass varchar(30), tel char(10))')
+//   db.run('create table student(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), rollno varchar(20), pass varchar(64), tel char(10))')
   
   
 
@@ -49,6 +49,9 @@ app.post('/check', (req,res)=>{
         pass:false
     }
     db.get(`select * from student where emailid = '${inp.email}'`, (err, data)=>{
+        if(data)
+            data.pass = crypto.createHash('sha256').update(data.pass).digest('hex');
+
         if(!data) // if undefined
             obj.email = false;
         else if(inp.pass == data.pass)
@@ -59,6 +62,8 @@ app.post('/check', (req,res)=>{
 app.post('/',(req,res)=>{
     const data = JSON.parse(req.headers.data);
     console.log(data.email);
+    console.log(data.pass);
+    data.pass = crypto.createHash('sha256').update(data.pass).digest('hex');
     db.run(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}',  '${data.pass}', '${data.tel}');`, (err)=>{
         if(err){
             console.log(err);   
@@ -130,6 +135,9 @@ app.post('/user/:id', (req,res)=>{
         var sql = `select * from student where emailid = '${id}';`;
         db.get(sql, (err, data)=>{        
     //    res.setHeader('content-type')
+           
+            pass = crypto.createHash('sha256').update(pass).digest('hex');
+
             console.log(sql);
     console.log(data);
             if(!data)
