@@ -50,7 +50,7 @@ app.post('/check', (req,res)=>{
     }
     db.get(`select * from student where emailid = '${inp.email}'`, (err, data)=>{
         if(data)
-            data.pass = crypto.createHash('sha256').update(data.pass).digest('hex');
+            data.pass = crypto.createHash('sha1').update(data.pass).digest('hex');
 
         if(!data) // if undefined
             obj.email = false;
@@ -63,7 +63,7 @@ app.post('/',(req,res)=>{
     const data = JSON.parse(req.headers.data);
     console.log(data.email);
     console.log(data.pass);
-    data.pass = crypto.createHash('sha256').update(data.pass).digest('hex');
+    data.pass = crypto.createHash('sha1').update(data.pass).digest('hex');
     db.run(`insert into student values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.rollno}',  '${data.pass}', '${data.tel}');`, (err)=>{
         if(err){
             console.log(err);   
@@ -136,7 +136,7 @@ app.post('/user/:id', (req,res)=>{
         db.get(sql, (err, data)=>{        
     //    res.setHeader('content-type')
            
-            pass = crypto.createHash('sha256').update(pass).digest('hex');
+            pass = crypto.createHash('sha1').update(pass).digest('hex');
 
             console.log(sql);
     console.log(data);
