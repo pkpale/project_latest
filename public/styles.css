@@ -1,5 +1,5 @@
 .back{
-    background-image: url('13254645_266457700372787_5577385378057969141_o.jpg');
+    background-image: url('background-sandvine.jpg');
     width:100%;
     
     height:100%;
@@ -30,6 +30,7 @@ img{
     margin:0;
     padding:0;
     position: static;
+    /* background-color: lightgrey; */
 }
 .xy{
     margin:0
