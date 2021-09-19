@@ -8,7 +8,7 @@ app.use(express.urlencoded({extended:true}));
 
 //connecting sqlite
 
-let db = new sqlite3.Database('./database.db', (err) => {
+let db = new sqlite3.Database('./database_new.db', (err) => {
     if (err) {
       console.error(err.message);
     }
@@ -17,13 +17,14 @@ let db = new sqlite3.Database('./database.db', (err) => {
 
 
 // db.run('drop table employee;')
+// db.run('commit;')
 //   creating table student_profile
 //   db.run('create table student_profile(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), tel varchar(10), location varchar(20), linkedin_id varchar(50),  skype_id varchar(50),    graduation_year varchar(4),   gschool varchar(20),    gcgpa varchar(10),    gbranch varchar(20),    xiischool varchar(20),  xiicgpa varchar(10),     xschool varchar(20),    xcgpa varchar(10) );');
 // db.run('drop table student');
 // creating table employee 
-//   db.run('create table employee(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), emp_id varchar(8), pass varchar(64), tel char(10), cafeteria_seat varchar(3) DEFAULT null);')
-//   console.log('print table')
-//   console.log(db.run('select * from employee;'));
+// db.run('create table employee(emailid varchar(20) primary key, fname varchar(20), lname varchar(20), emp_id varchar(8), pass varchar(64), tel char(10), cafeteria_seat varchar(3) DEFAULT null, meeting_seat varchar(3) DEFAULT null, cubical_seat varchar(3) DEFAULT null, parking_seat varchar(3) DEFAULT null);')
+console.log('print table')
+console.log(db.run('select * from employee;'));
 
 // db.run(`insert into employee values( 'ravi@sandvine.com' , 'ravi', 'sharma', '1234',  'hsdjs', '78273827382', 'null');`)
 db.all('select * from employee;', (err, data) => {
@@ -71,7 +72,7 @@ app.post('/',(req,res)=>{
     console.log(data.email);
     console.log(data.pass);
     data.pass = crypto.createHash('sha256').update(data.pass).digest('hex');
-    db.run(`insert into employee values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.emp_id}',  '${data.pass}', '${data.tel}', 'null');`, (err)=>{
+    db.run(`insert into employee(emailid, fname, lname, emp_id, pass, tel) values( '${data.email}' , '${data.fname}', '${data.lname}', '${data.emp_id}',  '${data.pass}', '${data.tel}');`, (err)=>{
         if(err){
             console.log(err);   
         }    
@@ -129,13 +130,50 @@ app.post('/user/save/:id', (req, res) => {
     var seat_no = (req.headers.seat_no);
     console.log(db.get('select * from employee'));
     console.log(seat_no);
-    db.run(`update employee set cafeteria_seat = '${seat_no}' where emailid='${id}';`, (err) => {
-        if (err) {
-            console.log(err);
-        }
-    });
-    console.log(db.run('select * from employee;'));
-    res.json({redirect:'../'});
+    var type = (req.headers.type)
+    if(type == 0){
+        db.run(`update employee set cafeteria_seat = '${seat_no}' where emailid='${id}';`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        console.log(db.run('select * from employee;'));
+        res.json({redirect:'../'});
+
+    }
+    if(type == 1){
+        db.run(`update employee set cubical_seat = '${seat_no}' where emailid='${id}';`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        console.log(db.run('select * from employee;'));
+        res.json({redirect:'../'});
+    }
+
+    if(type == 2){
+        db.run(`update employee set meeting_seat = '${seat_no}' where emailid='${id}';`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        console.log(db.run('select * from employee;'));
+        res.json({redirect:'../'});
+
+    }
+
+    if(type == 3){
+        db.run(`update employee set parking_seat = '${seat_no}' where emailid='${id}';`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        console.log(db.run('select * from employee;'));
+        res.json({redirect:'../'});
+
+    }
+    
+    
 });
 app.post('/user/:id', (req,res)=>{
     console.log(req.url);
@@ -192,4 +230,46 @@ app.post('/edit/:id', (req,res) =>{
             }
         });
     
+});
+
+app.get('/user/parking/:id', (req, res) => {
+    const id = req.params.id;
+    db.get(`select * from employee where emailid = '${id}'`, (err, data)=>{
+        db.all(`select parking_seat from employee where emailid != '${id}' and parking_seat != 'null';`, (err, data1) => {
+            if (err)
+                console.log(err);
+            else {
+               console.log(data1.length)
+               res.render('parking', {data:data, data1:data1});
+            }
+        });
+    });
+});
+
+app.get('/user/cubical/:id', (req, res) => {
+    const id = req.params.id;
+    db.get(`select * from employee where emailid = '${id}'`, (err, data)=>{
+        db.all(`select cubical_seat from employee where emailid != '${id}' and cubical_seat != 'null';`, (err, data1) => {
+            if (err)
+                console.log(err);
+            else {
+               console.log(data1.length)
+               res.render('cubical', {data:data, data1:data1});
+            }
+        });
+    });
+});
+
+app.get('/user/meeting/:id', (req, res) => {
+    const id = req.params.id;
+    db.get(`select * from employee where emailid = '${id}'`, (err, data)=>{
+        db.all(`select meeting_seat from employee where emailid != '${id}' and meeting_seat != 'null';`, (err, data1) => {
+            if (err)
+                console.log(err);
+            else {
+               console.log(data1.length)
+               res.render('meeting', {data:data, data1:data1});
+            }
+        });
+    });
 });

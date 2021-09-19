@@ -243,7 +243,7 @@
             console.log(data, "ravi");
             var x = data.cafeteria_seat;
             console.log("ravi", x)
-            if(x != 'undefined' && x != 'null') // not undefined
+            if(x != 'undefined' && x != null) // not undefined
             {
                 document.getElementsByClassName('seats')[x].style.backgroundColor = "green"
             }
@@ -303,6 +303,7 @@
             xhttp.open("POST", `/user/save/${email}`, true);
         
             xhttp.setRequestHeader("seat_no",`${seat_no}`);
+            xhttp.setRequestHeader("type",0);
             
             xhttp.send();
     });

@@ -58,9 +58,11 @@
         var utility = document.getElementsByClassName('booking-btn');
         var data = `<%- JSON.stringify(data) %>`
         data = JSON.parse(data);
+        console.log("here 60")
+        console.log(data)
         
         // check if employee has cafeteria seat booked or not
-        if(data.cafeteria_seat != 'undefined' && data.cafeteria_seat != 'null') {
+        if(data.cafeteria_seat != undefined && data.cafeteria_seat != null) {
             document.getElementsByClassName('booking-btn')[0].childNodes[3].style.display = "";
             document.getElementsByClassName('booking-btn')[0].childNodes[5].style.display = "none";
             console.log(document.getElementsByClassName('booking-btn')[0].childNodes);
@@ -72,16 +74,41 @@
         });
 
         // redirect to cubical
-        // write code
-        ///////////////
+        if(data.parking_seat != undefined && data.parking_seat != null) {
+            document.getElementsByClassName('booking-btn')[1].childNodes[3].style.display = "";
+            document.getElementsByClassName('booking-btn')[1].childNodes[5].style.display = "none";
+            console.log(document.getElementsByClassName('booking-btn')[1].childNodes);
+        }
+        //redirect to cubical
+        utility[1].addEventListener('click', ()=>{
+            console.log('inside eventlist')
+            window.location.href = `/user/cubical/${data.emailid}`;
+        });
         
         // redirect to meeting
-        // write code
-        ///////////////
-        
+        if(data.parking_seat != undefined && data.parking_seat != null) {
+            document.getElementsByClassName('booking-btn')[2].childNodes[3].style.display = "";
+            document.getElementsByClassName('booking-btn')[2].childNodes[5].style.display = "none";
+            console.log(document.getElementsByClassName('booking-btn')[2].childNodes);
+        }
+        //redirect to meeting
+        utility[2].addEventListener('click', ()=>{
+            console.log('inside eventlist')
+            window.location.href = `/user/meeting/${data.emailid}`;
+        });
+
+
         // redirect to parking lot
-        // write code
-        ///////////////
+        if(data.parking_seat != undefined && data.parking_seat != null) {
+            document.getElementsByClassName('booking-btn')[3].childNodes[3].style.display = "";
+            document.getElementsByClassName('booking-btn')[3].childNodes[5].style.display = "none";
+            console.log(document.getElementsByClassName('booking-btn')[3].childNodes);
+        }
+        //redirect to parking
+        utility[3].addEventListener('click', ()=>{
+            console.log('inside eventlist')
+            window.location.href = `/user/parking/${data.emailid}`;
+        });
     </script>
 </body>
 </html>
