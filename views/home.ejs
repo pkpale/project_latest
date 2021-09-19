@@ -1,0 +1,87 @@
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs') %>
+    </head>
+    <style>
+        .booking-btn{
+            height:180px;
+            width:300px;
+            margin-top:20px;
+            margin-bottom: 30px;
+            margin-left: 8%;
+            margin-right: 8%;
+        }
+       </style>
+<body>
+    <div class="container-fluid cont ">
+
+        <%- include('partials/nav.ejs') %>
+
+                <div class="container-fluid back">
+                    <h2 style="text-align: center;">Hai <%=data.fname%></h2>
+                <div class="container main-cont  "> 
+                <div class="row">
+                     <span>
+                        <button class="booking-btn btn btn-success">
+                            <strong style="font-size: 40px;">Cafeteria</strong>  
+                            <p style="text-align: center; display: none;"> <i> 1 seat booked </i></p>
+                            <p style="text-align: center; color: red;"> <i> No seat booked </i></p>
+                        </button>
+                    </span>
+                    <span>
+                        <button class="booking-btn btn btn-success">
+                            <strong style="font-size: 30px;">Office Cubical</strong>  
+                            <p style="text-align: center; display: none;"> <i> 1 seat booked </i></p>
+                            <p style="text-align: center; color: red;"> <i> No seat booked </i></p>
+                        </button>
+                    </span>
+                </div>
+                <div class="row">
+                    <button class="booking-btn btn btn-success">
+                        <strong style="font-size: 30px;">Meeting</strong>  
+                        <p style="text-align: center; display: none;"> <i> 1 seat booked </i></p>
+                        <p style="text-align: center; color: red;"> <i> No seat booked </i></p>
+                    </button>
+                    <button class="booking-btn btn btn-success">
+                        <strong style="font-size: 30px;">Parking Slot</strong>  
+                        <p style="text-align: center; display: none;"> <i> 1 seat booked </i></p>
+                        <p style="text-align: center; color: red;"> <i> No seat booked </i></p>
+                    </button>
+                    </div>
+             
+                </div>
+                </div>    
+
+    <%- include('partials/footer.ejs') %>
+    
+    <script>
+        var utility = document.getElementsByClassName('booking-btn');
+        var data = `<%- JSON.stringify(data) %>`
+        data = JSON.parse(data);
+        
+        // check if employee has cafeteria seat booked or not
+        if(data.cafeteria_seat != 'undefined' && data.cafeteria_seat != 'null') {
+            document.getElementsByClassName('booking-btn')[0].childNodes[3].style.display = "";
+            document.getElementsByClassName('booking-btn')[0].childNodes[5].style.display = "none";
+            console.log(document.getElementsByClassName('booking-btn')[0].childNodes);
+        }
+        //redirect to cafeteria
+        utility[0].addEventListener('click', ()=>{
+            console.log('inside eventlist')
+            window.location.href = `/user/cafeteria/${data.emailid}`;
+        });
+
+        // redirect to cubical
+        // write code
+        ///////////////
+        
+        // redirect to meeting
+        // write code
+        ///////////////
+        
+        // redirect to parking lot
+        // write code
+        ///////////////
+    </script>
+</body>
+</html>

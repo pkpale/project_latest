@@ -9,8 +9,8 @@
             <input type="text" class="form-control" name='lname' maxlength="20">
         </div>
         <div class="form-group">
-            <label for="rollno">ROll No<span style="color: red;">*</span>:</label>
-            <input type="text" class="form-control" name='rollno' maxlength="20">
+            <label for="Emp_Id">EMP ID<span style="color: red;">*</span>:</label>
+            <input type="text" class="form-control" name='Emp_Id' maxlength="20">
         </div>
         <div class="form-group">
             <label for="Email">Email<span style="color: red;">*</span>: <span style="color: orange;">(use emails ending at '@sandvine.com')</span></label>
@@ -95,7 +95,7 @@
                         triggerAlert("LastName Can't be empty");
                    
                 }
-            else  if(document.getElementsByName('rollno')[0].value.trim() == "" )
+            else  if(document.getElementsByName('Emp_Id')[0].value.trim() == "" )
             {
                 r = false;
                 
@@ -169,7 +169,7 @@
                         pass: document.getElementsByName('pass')[0].value,
                         fname: document.getElementsByName('fname')[0].value,
                         lname: document.getElementsByName('lname')[0].value,
-                        rollno: document.getElementsByName('rollno')[0].value,
+                        Emp_Id: document.getElementsByName('Emp_Id')[0].value,
                         tel: document.getElementsByName('tel')[0].value,
                     } 
                     xhttp.onreadystatechange=function(){
